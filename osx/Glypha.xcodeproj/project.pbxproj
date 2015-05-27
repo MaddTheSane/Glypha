@@ -12,6 +12,8 @@
 		554DA2F31B1668130031B573 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554DA2F11B1668130031B573 /* MainMenu.xib */; };
 		554DA3081B1668B80031B573 /* GLResourcesBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 554DA3071B1668B80031B573 /* GLResourcesBridge.mm */; };
 		554DA30A1B1669530031B573 /* GLResources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A59E06DF18A070B8009DF983 /* GLResources.cpp */; };
+		554DA30C1B1670EB0031B573 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DA30B1B1670EB0031B573 /* Rect.swift */; };
+		554DA30E1B1674AE0031B573 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DA30D1B1674AE0031B573 /* Sounds.swift */; };
 		A528F68C189F80470085A43D /* GLImage_CoreImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */; };
 		A54B601315B7CB560072674A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B601215B7CB560072674A /* Cocoa.framework */; };
 		A54B602615B7CB570072674A /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A54B602515B7CB570072674A /* main.mm */; };
@@ -37,6 +39,8 @@
 		554DA3061B1668B80031B573 /* SwiftGlypha-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftGlypha-Bridging-Header.h"; sourceTree = "<group>"; };
 		554DA3071B1668B80031B573 /* GLResourcesBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLResourcesBridge.mm; sourceTree = "<group>"; };
 		554DA3091B1669210031B573 /* GLResourcesBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLResourcesBridge.h; sourceTree = "<group>"; };
+		554DA30B1B1670EB0031B573 /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
+		554DA30D1B1674AE0031B573 /* Sounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 		A50CB6E115D1736600126032 /* GLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPoint.h; sourceTree = "<group>"; };
 		A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLImage_CoreImage.cpp; sourceTree = "<group>"; };
 		A54B600E15B7CB560072674A /* Glypha III.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Glypha III.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,9 +93,11 @@
 		554DA2EA1B1668130031B573 /* SwiftGlypha */ = {
 			isa = PBXGroup;
 			children = (
-				554DA2ED1B1668130031B573 /* AppDelegate.swift */,
 				554DA3091B1669210031B573 /* GLResourcesBridge.h */,
 				554DA3071B1668B80031B573 /* GLResourcesBridge.mm */,
+				554DA2ED1B1668130031B573 /* AppDelegate.swift */,
+				554DA30B1B1670EB0031B573 /* Rect.swift */,
+				554DA30D1B1674AE0031B573 /* Sounds.swift */,
 				554DA2EF1B1668130031B573 /* Images.xcassets */,
 				554DA2F11B1668130031B573 /* MainMenu.xib */,
 				554DA2EB1B1668130031B573 /* Supporting Files */,
@@ -272,7 +278,9 @@
 			files = (
 				554DA2EE1B1668130031B573 /* AppDelegate.swift in Sources */,
 				554DA30A1B1669530031B573 /* GLResources.cpp in Sources */,
+				554DA30E1B1674AE0031B573 /* Sounds.swift in Sources */,
 				554DA3081B1668B80031B573 /* GLResourcesBridge.mm in Sources */,
+				554DA30C1B1670EB0031B573 /* Rect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
