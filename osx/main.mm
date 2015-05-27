@@ -5,10 +5,6 @@
 #include "GLResources.h"
 
 @interface GameView : NSOpenGLView
-{
-    CVDisplayLinkRef displayLink_;
-    GL::Game *game_;
-}
 
 - (void)setGame:(GL::Game *)game;
 - (void)render;
@@ -16,14 +12,6 @@
 @end
 
 @interface AppController : NSObject <NSApplicationDelegate>
-{
-    GL::Game *game_;
-    NSWindow *window_;
-    NSMenuItem *newGame_;
-    NSMenuItem *endGame_;
-    NSMenuItem *helpMenuItem_;
-    GameView *gameView_;
-}
 
 - (IBAction)newGame:(id)sender;
 - (void)handleGameEvent:(GL::Game::Event)event;
@@ -32,25 +20,33 @@
 
 static void callback(GL::Game::Event event, void *context)
 {
-    [(AppController*)context handleGameEvent:event];
+    [(__bridge AppController*)context handleGameEvent:event];
 }
 
 @implementation AppController
+{
+	GL::Game *_game;
+	NSWindow *window_;
+	NSMenuItem *_newGame;
+	NSMenuItem *_endGame;
+	NSMenuItem *_helpMenuItem;
+	GameView *_gameView;
+}
 
 - (void)setupMenuBar:(NSString *)appName
 {
-    NSMenu *menubar = [[[NSMenu alloc] init] autorelease];
+    NSMenu *menubar = [[NSMenu alloc] init];
     [NSApp setMainMenu:menubar];
     NSMenuItem *item;
     
-    NSMenu *appMenu = [[[NSMenu alloc] initWithTitle:appName] autorelease];
-    NSMenuItem *appMenuItem = [[[NSMenuItem alloc] init] autorelease];
-    NSMenu *gameMenu = [[[NSMenu alloc] initWithTitle:@"Game"] autorelease];
+    NSMenu *appMenu = [[NSMenu alloc] initWithTitle:appName];
+    NSMenuItem *appMenuItem = [[NSMenuItem alloc] init];
+    NSMenu *gameMenu = [[NSMenu alloc] initWithTitle:@"Game"];
     [gameMenu setAutoenablesItems:NO];
-    NSMenuItem *gameMenuItem = [[[NSMenuItem alloc] init] autorelease];
-    NSMenu *helpMenu = [[[NSMenu alloc] initWithTitle:@"Help"] autorelease];
+    NSMenuItem *gameMenuItem = [[NSMenuItem alloc] init];
+    NSMenu *helpMenu = [[NSMenu alloc] initWithTitle:@"Help"];
     [helpMenu setAutoenablesItems:NO];
-    NSMenuItem *helpMenuItem = [[[NSMenuItem alloc] init] autorelease];
+    NSMenuItem *helpMenuItem = [[NSMenuItem alloc] init];
     [appMenuItem setSubmenu:appMenu];
     [gameMenuItem setSubmenu:gameMenu];
     [helpMenuItem setSubmenu:helpMenu];
@@ -64,28 +60,28 @@ static void callback(GL::Game::Event event, void *context)
     NSString *quitText = [NSString stringWithFormat:@"Quit %@", appName];
     item = [appMenu addItemWithTitle:quitText action:@selector(terminate:) keyEquivalent:@"q"];
     [item setTarget:NSApp];
-    newGame_ = [gameMenu addItemWithTitle:@"New Game" action:@selector(newGame:) keyEquivalent:@"n"];
-    [newGame_ setTarget:self];
-    endGame_ = [gameMenu addItemWithTitle:@"End Game" action:@selector(endGame:) keyEquivalent:@"e"];
-    [endGame_ setTarget:self];
-    [endGame_ setEnabled:NO];
-    helpMenuItem_ = [helpMenu addItemWithTitle:@"Help" action:@selector(showHelp:) keyEquivalent:@"h"];
-    [helpMenuItem_ setTarget:self];
+    _newGame = [gameMenu addItemWithTitle:@"New Game" action:@selector(newGame:) keyEquivalent:@"n"];
+    [_newGame setTarget:self];
+    _endGame = [gameMenu addItemWithTitle:@"End Game" action:@selector(endGame:) keyEquivalent:@"e"];
+    [_endGame setTarget:self];
+    [_endGame setEnabled:NO];
+    _helpMenuItem = [helpMenu addItemWithTitle:@"Help" action:@selector(showHelp:) keyEquivalent:@"h"];
+    [_helpMenuItem setTarget:self];
 }
 
 - (id)init
 {
     self = [super init];
     if (self != nil) {
-        NSString *appName = [NSString stringWithUTF8String:GL::kGameName];
+        NSString *appName = @(GL::kGameName.c_str());
         NSUInteger style = NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask;
         window_ = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 640, 460) styleMask:style backing:NSBackingStoreBuffered defer:NO];
         [window_ setTitle:appName];
-        gameView_ = [[GameView alloc] initWithFrame:[[window_ contentView] frame]];
-        [[window_ contentView] addSubview:gameView_];
+        _gameView = [[GameView alloc] initWithFrame:[[window_ contentView] frame]];
+        [[window_ contentView] addSubview:_gameView];
         [self setupMenuBar:appName];
-        game_ = new GL::Game(callback, self);
-        [gameView_ setGame:game_];
+        _game = new GL::Game(callback, (__bridge void*)self);
+        [_gameView setGame:_game];
     }
     return self;
 }
@@ -102,31 +98,31 @@ static void callback(GL::Game::Event event, void *context)
 
 - (void)newGame:(__unused id)sender
 {
-    game_->newGame();
+    _game->newGame();
 }
 
 - (void)endGame:(__unused id)sender
 {
-    game_->endGame();
+    _game->endGame();
 }
 
 - (void)showHelp:(__unused id)sender
 {
-    game_->showHelp();
+    _game->showHelp();
 }
 
 - (void)handleGameEvent:(GL::Game::Event)event
 {
     switch (event) {
         case GL::Game::EventStarted:
-            [newGame_ setEnabled:NO];
-            [endGame_ setEnabled:YES];
-            [helpMenuItem_ setEnabled:NO];
+            _newGame.enabled = NO;
+            _endGame.enabled = YES;
+            _helpMenuItem.enabled = NO;
             break;
         case GL::Game::EventEnded:
-            [newGame_ setEnabled:YES];
-            [endGame_ setEnabled:NO];
-            [helpMenuItem_ setEnabled:YES];
+            _newGame.enabled = YES;
+            _endGame.enabled = NO;
+            _helpMenuItem.enabled = YES;
             break;
     }
 }
@@ -135,28 +131,31 @@ static void callback(GL::Game::Event event, void *context)
 
 static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink __unused, const CVTimeStamp* now __unused, const CVTimeStamp* outputTime __unused, CVOptionFlags flagsIn __unused, CVOptionFlags* flagsOut __unused, void* displayLinkContext)
 {
-    [(GameView*)displayLinkContext render];
+    [(__bridge GameView*)displayLinkContext render];
     return kCVReturnSuccess;
 }
 
 @implementation GameView
+{
+    CVDisplayLinkRef _displayLink;
+    GL::Game *_game;
+}
 
 - (id)initWithFrame:(NSRect)frameRect
 {
     NSOpenGLPixelFormatAttribute attr[] = {NSOpenGLPFAAccelerated, NSOpenGLPFADoubleBuffer, NSOpenGLPFADepthSize, 24, 0};
-    NSOpenGLPixelFormat *format = [[[NSOpenGLPixelFormat alloc] initWithAttributes:attr] autorelease];
+    NSOpenGLPixelFormat *format = [[NSOpenGLPixelFormat alloc] initWithAttributes:attr];
     return [super initWithFrame:frameRect pixelFormat:format];
 }
 
 - (void)dealloc
 {
-    CVDisplayLinkRelease(displayLink_);
-    [super dealloc];
+    CVDisplayLinkRelease(_displayLink);
 }
 
 - (void)setGame:(GL::Game *)game
 {
-    game_ = game;
+    _game = game;
 }
 
 - (void)prepareOpenGL
@@ -166,34 +165,34 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink __unused, const
     [[self openGLContext] setValues:&swapInt forParameter:NSOpenGLCPSwapInterval]; 
 
     // Create a display link capable of being used with all active displays
-    CVDisplayLinkCreateWithActiveCGDisplays(&displayLink_);
+    CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
     
     // Set the renderer output callback function
-    CVDisplayLinkSetOutputCallback(displayLink_, &displayLinkCallback, self);
+    ::CVDisplayLinkSetOutputCallback(_displayLink, &displayLinkCallback, (__bridge void*)self);
     
     // Set the display link for the current renderer
     CGLContextObj cglContext = (CGLContextObj)[[self openGLContext] CGLContextObj];
     CGLPixelFormatObj cglPixelFormat = (CGLPixelFormatObj)[[self pixelFormat] CGLPixelFormatObj];
-    CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(displayLink_, cglContext, cglPixelFormat);
+    CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(_displayLink, cglContext, cglPixelFormat);
     
     // Activate the display link
-    CVDisplayLinkStart(displayLink_);
+    CVDisplayLinkStart(_displayLink);
 }
 
 - (void)reshape
 {
 	NSRect bounds = [self bounds];
-    game_->renderer()->resize(bounds.size.width, bounds.size.height);
+    _game->renderer()->resize(bounds.size.width, bounds.size.height);
 	[[self openGLContext] update];
 }
 
 - (void)render
 {
-    if (game_) {
+    if (_game) {
         NSOpenGLContext *ctx = [self openGLContext];
         [ctx makeCurrentContext];
         CGLLockContext((CGLContextObj)[ctx CGLContextObj]);
-        game_->run();
+        _game->run();
         [ctx flushBuffer];
         CGLUnlockContext((CGLContextObj)[ctx CGLContextObj]);;
     }
@@ -207,8 +206,8 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink __unused, const
 - (void)mouseDown:(NSEvent *)event
 {
     NSPoint mouseLoc = [self convertPoint:[event locationInWindow] fromView:nil];
-    GL::Point point(mouseLoc.x, game_->renderer()->bounds().height() - mouseLoc.y);
-    game_->handleMouseDownEvent(point);
+    GL::Point point(mouseLoc.x, _game->renderer()->bounds().height() - mouseLoc.y);
+    _game->handleMouseDownEvent(point);
 }
 
 - (void)doKey:(NSEvent *)event up:(BOOL)up
@@ -256,9 +255,9 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink __unused, const
                 break;
         }
         if (up) {
-            game_->handleKeyUpEvent(key);
+            _game->handleKeyUpEvent(key);
         } else {
-            game_->handleKeyDownEvent(key);
+            _game->handleKeyDownEvent(key);
         }
     }
 }
@@ -288,7 +287,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink __unused, const
 int main(int argc, char *argv[])
 {
     NSApplication *app = [NSApplication sharedApplication];
-    AppController *controller = [[[AppController alloc] init] autorelease];
+    AppController *controller = [[AppController alloc] init];
     app.delegate = controller;
     return NSApplicationMain(argc, (const char **)argv);
 }
