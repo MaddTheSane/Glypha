@@ -3,7 +3,9 @@
 
 #include "GLResources.h"
 
-enum {
+namespace GL {
+
+typedef enum _SoundValue {
     kBirdSound = 0,
     kBonusSound = 1,
     kBoom1Sound = 2,
@@ -20,9 +22,7 @@ enum {
     kScrape2Sound = 13,
     
     kMaxSounds
-};
-
-namespace GL {
+} SoundID;
 
 class Sounds {
 public:
@@ -44,7 +44,7 @@ public:
         load(kWalkSound, walk_aif, walk_aif_len);
     }
     
-    int preloadCount(int which) {
+    int preloadCount(SoundID which) {
         switch (which) {
             case kBonusSound:
             case kFlapSound:
@@ -57,13 +57,14 @@ public:
             case kScrape2Sound:
             case kScreechSound:
                 return 8;
+            default:
+                return 1;
         }
-        return 1;
     }
     
     void initContext();
-    void load(int which, const unsigned char *buf, unsigned bufLen);
-    void play(int which);
+    void load(SoundID which, const unsigned char *buf, unsigned bufLen);
+    void play(SoundID which);
     
 private:
     void *context;
