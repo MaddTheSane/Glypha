@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias Point = (v: Int32, h: Int32)
+
 struct Rect {
 	var top: Int32
 	var left: Int32
