@@ -10,7 +10,7 @@ import Foundation
 import ImageIO
 import OpenGL.GL
 
-class Image {
+final class Image {
 	private var texture: GLuint = 0
 	private var alpha = false
 	private(set) var width: Int32 = 0

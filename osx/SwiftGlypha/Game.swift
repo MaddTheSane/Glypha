@@ -8,6 +8,8 @@
 
 import Foundation
 
+private var numOwls: Int32 = 1
+
 class Game {
 	struct Key : RawOptionSetType {
 		typealias RawValue = UInt
@@ -41,10 +43,113 @@ class Game {
 		case Ended
 	}
 	
-	func handleKeyUpEvent(theKey: Key) {
-	
+	enum Mode: Int16 {
+		/// enemy & player mode
+		case Idle = -1
+		
+		/// enemy & player mode
+		case Flying
+		
+		/// enemy & player mode
+		case Walking
+		
+		/// player mode
+		case Sinking
+		
+		/// enemy mode
+		case Spawning
+		
+		/// enemy mode & player mode
+		case Falling
+		
+		/// enemy mode
+		case EggTimer
+		
+		/// enemy mode
+		case DeadAndGone
+		
+		/// player mode
+		case Bones
+		
+		/// hand mode
+		case Lurking = 10
+		
+		/// hand mode
+		case OutGrabeth
+		
+		/// hand mode
+		case Clutching
+		
+		/// eye mode
+		case Waiting = 15
+		
+		/// eye mode
+		case Stalking
+	};
+
+	enum HelpState {
+		case Closed
+		case Opening
+		case Open
 	}
 	
+	var keys = Key.None
+	
+	var helpState = HelpState.Closed
+	
+	var renderer = Renderer()
+	
+	//var eyeImg = Image()
+	class Eye {
+		var destination = Rect()
+		var mode = Mode.Idle
+		var opening: Int32 = 0
+		var srcNum: Int32 = 0
+		var frame: Int32 = 0
+		var killed = false
+		var entering = false
+		var eyeImg = Image()
+		var rects = [Rect](count: 4, repeatedValue: Rect())
+		init() {
+			eyeImg.load(GlyphaDataForResource(.Eye))
+			for i in 0..<4 {
+				rects[i] = Rect(left: 0, top: 0, right: 48, bottom: 31);
+				rects[i].offsetBy(horizontal: 0, vertical: Int32(i) * 31);
+			}
+		}
+		
+		func start() {
+			destination = Rect(left: 0, top: 0, right: 48, bottom: 31);
+			destination.offsetBy(horizontal: 296, vertical: 97);
+			mode = .Waiting;
+			frame = (numOwls + 2) * 720;
+			srcNum = 0;
+			opening = 1;
+			killed = false;
+			entering = false;
+		}
+		
+		func kill() {
+			
+		}
+		
+		func handle() {
+			
+		}
+		
+		func draw() {
+			
+		}
+	}
+	
+	func run() {
+		
+	}
+
+	func handleKeyUpEvent(theKey: Key) {
+
+	}
+
 	func handleKeyDownEvent(theKey: Key) {
 		
 	}

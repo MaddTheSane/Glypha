@@ -10,12 +10,13 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
 	@IBOutlet weak var window: NSWindow!
 	@IBOutlet weak var gameView: GameView!
+	private var game: Game! = nil
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// Insert code here to initialize your application
+		 game = Game()
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {

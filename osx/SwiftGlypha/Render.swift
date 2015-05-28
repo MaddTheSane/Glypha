@@ -9,7 +9,7 @@
 import Cocoa
 import OpenGL.GL
 
-class Renderer {
+final class Renderer {
 	private(set) var bounds: Rect
 	private var didPrepare = false
 	private var lineStart: Point = (0,0)
@@ -18,7 +18,7 @@ class Renderer {
 		bounds = Rect()
 	}
 	
-	func resize(width: Int32, height: Int32) {
+	func resize(#width: Int32, height: Int32) {
 		let w = GLsizei(width)
 		let h = GLsizei(height)
 		glViewport(0, 0, w, h)

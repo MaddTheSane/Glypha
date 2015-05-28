@@ -49,18 +49,24 @@ class GameView: NSOpenGLView {
 
 		// Activate the display link
 		CVDisplayLinkStart(displayLink);
-
 	}
 	
 	func render() {
-		
+		if let game = game {
+			let ctx = openGLContext
+			ctx.makeCurrentContext()
+			CGLLockContext(ctx.CGLContextObj)
+			game.run()
+			ctx.flushBuffer()
+			CGLUnlockContext(ctx.CGLContextObj)
+		}
 	}
-	
+
 	override var canBecomeKeyView: Bool {
 		return true
 	}
 	
-	func doKey(event: NSEvent, up: Bool) {
+	private func doKey(event: NSEvent, up: Bool) {
 		let chars = event.characters! as NSString
 		for i in 0..<chars.length {
 			let ch = chars.characterAtIndex(i)
@@ -103,61 +109,24 @@ class GameView: NSOpenGLView {
 			default:
 				key = .None
 			}
+			if up {
+				game.handleKeyUpEvent(key)
+			} else {
+				game.handleKeyDownEvent(key)
+			}
 		}
-		
 	}
 	
-	/*
-- (void)doKey:(NSEvent *)event up:(BOOL)up
-{
-NSString *chars = [event characters];
-for (NSUInteger i = 0; i < [chars length]; ++i) {
-unichar ch = [chars characterAtIndex:i];
-GL::Game::Key key;
-switch (ch) {
-case ' ':
-key = GL::Game::KeySpacebar;
-break;
-case NSUpArrowFunctionKey:
-key = GL::Game::KeyUpArrow;
-break;
-case NSDownArrowFunctionKey:
-key = GL::Game::KeyDownArrow;
-break;
-case NSLeftArrowFunctionKey:
-key = GL::Game::KeyLeftArrow;
-break;
-case NSRightArrowFunctionKey:
-key = GL::Game::KeyRightArrow;
-break;
-case 'a':
-key = GL::Game::KeyA;
-break;
-case 's':
-key = GL::Game::KeyS;
-break;
-case ';':
-key = GL::Game::KeyColon;
-break;
-case '"':
-key = GL::Game::KeyQuote;
-break;
-case NSPageUpFunctionKey:
-key = GL::Game::KeyPageUp;
-break;
-case NSPageDownFunctionKey:
-key = GL::Game::KeyPageDown;
-break;
-default:
-key = GL::Game::KeyNone;
-break;
-}
-if (up) {
-_game->handleKeyUpEvent(key);
-} else {
-_game->handleKeyDownEvent(key);
-}
-}
-}
-*/
+	override func keyDown(theEvent: NSEvent) {
+		doKey(theEvent, up: false)
+	}
+	
+	override func keyUp(theEvent: NSEvent) {
+		doKey(theEvent, up: true)
+	}
+	
+	override var acceptsFirstResponder: Bool {
+		return true
+	}
+
 }

@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class Sounds {
+final class Sounds {
 	private var sounds: [[AVAudioPlayer]]
 	enum SoundID: Int {
 		case Bird = 0
