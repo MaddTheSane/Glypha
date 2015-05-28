@@ -19,6 +19,7 @@
 		554DA3141B168CF70031B573 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DA3131B168CF70031B573 /* GameView.swift */; };
 		554DA3161B1695390031B573 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DA3151B1695390031B573 /* Game.swift */; };
 		559714171B1794EE0015AED0 /* Locks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559714161B1794EE0015AED0 /* Locks.swift */; };
+		559714191B179C300015AED0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559714181B179C300015AED0 /* Utilities.swift */; };
 		A528F68C189F80470085A43D /* GLImage_CoreImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */; };
 		A54B601315B7CB560072674A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B601215B7CB560072674A /* Cocoa.framework */; };
 		A54B602615B7CB570072674A /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A54B602515B7CB570072674A /* main.mm */; };
@@ -51,6 +52,7 @@
 		554DA3131B168CF70031B573 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		554DA3151B1695390031B573 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		559714161B1794EE0015AED0 /* Locks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locks.swift; sourceTree = "<group>"; };
+		559714181B179C300015AED0 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A50CB6E115D1736600126032 /* GLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPoint.h; sourceTree = "<group>"; };
 		A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLImage_CoreImage.cpp; sourceTree = "<group>"; };
 		A54B600E15B7CB560072674A /* Glypha III.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Glypha III.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +111,7 @@
 				554DA30F1B167BB80031B573 /* Render.swift */,
 				554DA3111B1681360031B573 /* Image.swift */,
 				554DA30B1B1670EB0031B573 /* Rect.swift */,
+				559714181B179C300015AED0 /* Utilities.swift */,
 				554DA30D1B1674AE0031B573 /* Sounds.swift */,
 				559714161B1794EE0015AED0 /* Locks.swift */,
 				554DA2ED1B1668130031B573 /* AppDelegate.swift */,
@@ -293,6 +296,7 @@
 			files = (
 				554DA3121B1681360031B573 /* Image.swift in Sources */,
 				554DA3161B1695390031B573 /* Game.swift in Sources */,
+				559714191B179C300015AED0 /* Utilities.swift in Sources */,
 				559714171B1794EE0015AED0 /* Locks.swift in Sources */,
 				554DA2EE1B1668130031B573 /* AppDelegate.swift in Sources */,
 				554DA30A1B1669530031B573 /* GLResources.cpp in Sources */,

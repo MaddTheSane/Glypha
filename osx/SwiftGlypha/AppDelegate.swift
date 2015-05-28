@@ -9,14 +9,18 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, GameDelegate {
 	@IBOutlet weak var window: NSWindow!
 	@IBOutlet weak var gameView: GameView!
-	private var game: Game! = nil
+	@IBOutlet weak var newGame: NSMenuItem!
+	@IBOutlet weak var endGame: NSMenuItem!
+	@IBOutlet weak var helpMenuItem: NSMenuItem!
+
+	private let game: Game = Game()
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// Insert code here to initialize your application
-		 game = Game()
+		game.delegate = self
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
@@ -24,16 +28,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	@IBAction func newGame(sender: AnyObject?) {
-		
+		game.newGame()
 	}
 	
 	@IBAction func endGame(sender: AnyObject?) {
-		
+		game.endGame()
 	}
 
 	@IBAction func showHelp(sender: AnyObject?) {
-		
+		game.showHelp()
 	}
-
+	
+	func handleGameEvent(event: Game.Event) {
+		switch event {
+		case .Started:
+			newGame.enabled = false
+			endGame.enabled = true
+			helpMenuItem.enabled = false
+			
+		case .Ended:
+			newGame.enabled = true
+			endGame.enabled = false
+			helpMenuItem.enabled = true
+		}
+	}
 }
 
