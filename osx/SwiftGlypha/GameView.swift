@@ -17,17 +17,16 @@ class GameView: NSOpenGLView {
 		render()
 	}
 	
-	@objc private class func displayLinkCallback(CVDisplayLink!, UnsafePointer<CVTimeStamp>, UnsafePointer<CVTimeStamp>, CVOptionFlags, UnsafeMutablePointer<CVOptionFlags>, displayLinkContext: UnsafeMutablePointer<Void>) -> CVReturn {
-		unsafeBitCast(displayLinkContext, GameView.self).render()
-		return kCVReturnSuccess.value;
-
-	}
-	
 	override func prepareOpenGL() {
 		let ohai = CVDisplayLinkSetOutputCallback
 		
 		//hacky-hacky!
-		let myImp = imp_implementationWithBlock(unsafeBitCast(GameView.displayLinkCallback, AnyObject.self))
+		let displayLinkCallback: @objc_block (CVDisplayLink!, UnsafePointer<CVTimeStamp>, UnsafePointer<CVTimeStamp>, CVOptionFlags, UnsafeMutablePointer<CVOptionFlags>, displayLinkContext: UnsafeMutablePointer<Void>) -> CVReturn = { (_, _, _, _, _, displayLinkContext) in
+			self.render()
+			return kCVReturnSuccess.value;
+		}
+		
+		let myImp = imp_implementationWithBlock(unsafeBitCast(displayLinkCallback, AnyObject.self))
 		let callback = unsafeBitCast(myImp, CVDisplayLinkOutputCallback.self)
 		
 		// Synchronize buffer swaps with vertical refresh rate
@@ -128,5 +127,4 @@ class GameView: NSOpenGLView {
 	override var acceptsFirstResponder: Bool {
 		return true
 	}
-
 }

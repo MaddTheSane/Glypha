@@ -10,6 +10,17 @@ import Foundation
 
 private var numOwls: Int32 = 1
 
+private let kNumLightningPts: Int32 = 8
+private let kMaxEnemies: Int32 = 8
+
+
+protocol FlyingEnemy {
+	var maxHorizVelocity: Int32 {get}
+	var maxVertVelocity: Int32 {get}
+	var heightSmell: Int32 {get}
+	var flapImpulse: Int32 {get}
+}
+
 class Game {
 	struct Key : RawOptionSetType {
 		typealias RawValue = UInt
@@ -43,7 +54,7 @@ class Game {
 		case Ended
 	}
 	
-	enum Mode: Int16 {
+	private enum Mode: Int16 {
 		/// enemy & player mode
 		case Idle = -1
 		
@@ -87,20 +98,20 @@ class Game {
 		case Stalking
 	};
 
-	enum HelpState {
+	private enum HelpState {
 		case Closed
 		case Opening
 		case Open
 	}
 	
-	var keys = Key.None
-	
-	var helpState = HelpState.Closed
-	
+	private var keys = Key.None
+	private var helpState = HelpState.Closed
 	var renderer = Renderer()
+	private var lock = Lock()
+	private let sounds = Sounds()
 	
 	//var eyeImg = Image()
-	class Eye {
+	private final class Eye {
 		var destination = Rect()
 		var mode = Mode.Idle
 		var opening: Int32 = 0
@@ -142,10 +153,39 @@ class Game {
 		}
 	}
 	
+		/*
+#define kOwlMaxHVel				96
+#define kOwlMaxVVel				320
+#define kOwlHeightSmell			96
+#define kOwlFlapImpulse			32
+
+#define kWolfMaxHVel			128
+#define kWolfMaxVVel			400
+#define kWolfHeightSmell		160
+#define kWolfFlapImpulse		48
+
+#define kJackalMaxHVel			192
+#define kJackalMaxVVel			512
+#define kJackalHeightSmell		240
+#define kJackalFlapImpulse		72
+*/
+	
 	func run() {
 		
 	}
 
+	func newGame() {
+		
+	}
+	
+	func endGame() {
+		
+	}
+	
+	func showHelp() {
+		
+	}
+	
 	func handleKeyUpEvent(theKey: Key) {
 
 	}
