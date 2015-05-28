@@ -96,17 +96,17 @@ static void callback(GL::Game::Event event, void *context)
     [window_ makeKeyAndOrderFront:nil];
 }
 
-- (void)newGame:(__unused id)sender
+- (IBAction)newGame:(__unused id)sender
 {
     _game->newGame();
 }
 
-- (void)endGame:(__unused id)sender
+- (IBAction)endGame:(__unused id)sender
 {
     _game->endGame();
 }
 
-- (void)showHelp:(__unused id)sender
+- (IBAction)showHelp:(__unused id)sender
 {
     _game->showHelp();
 }
