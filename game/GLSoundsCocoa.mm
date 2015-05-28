@@ -3,7 +3,7 @@
 #include <list>
 
 struct Context {
-    std::list<AVAudioPlayer*> sounds[kMaxSounds];
+    std::list<AVAudioPlayer*> sounds[GL::kMaxSounds];
 };
 
 void GL::Sounds::initContext()
@@ -11,7 +11,7 @@ void GL::Sounds::initContext()
     context = new Context;
 }
 
-void GL::Sounds::play(int which)
+void GL::Sounds::play(SoundID which)
 {
     Context *ctx = static_cast<Context*>(context);
     bool found = false;
@@ -31,7 +31,7 @@ void GL::Sounds::play(int which)
     }
 }
 
-void GL::Sounds::load(int which, const unsigned char *buf, unsigned bufLen)
+void GL::Sounds::load(SoundID which, const unsigned char *buf, unsigned bufLen)
 {
     Context *ctx = static_cast<Context*>(context);
     NSData *data = [NSData dataWithBytesNoCopy:(void*)buf length:bufLen freeWhenDone:NO];
