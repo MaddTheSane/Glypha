@@ -20,6 +20,23 @@
 		554DA3161B1695390031B573 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DA3151B1695390031B573 /* Game.swift */; };
 		559714171B1794EE0015AED0 /* Locks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559714161B1794EE0015AED0 /* Locks.swift */; };
 		559714191B179C300015AED0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559714181B179C300015AED0 /* Utilities.swift */; };
+		559714341B17AFA80015AED0 /* GLImage_CoreImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */; };
+		559714351B17AFA80015AED0 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A54B602515B7CB570072674A /* main.mm */; };
+		559714361B17AFA80015AED0 /* GLGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A55C2E5915B907D900F17FEB /* GLGame.cpp */; };
+		559714371B17AFA80015AED0 /* GLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A55C2E5C15B908D300F17FEB /* GLRenderer.cpp */; };
+		559714381B17AFA80015AED0 /* GLRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A57D044915B910A8005CFE23 /* GLRect.cpp */; };
+		559714391B17AFA80015AED0 /* GLImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5E2F65A15BE55A800DC68DD /* GLImage.cpp */; };
+		5597143A1B17AFA80015AED0 /* GLResources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A59E06DF18A070B8009DF983 /* GLResources.cpp */; };
+		5597143B1B17AFA80015AED0 /* GLCursorCocoa.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5719FEB18B1A0EC00FECD41 /* GLCursorCocoa.mm */; };
+		5597143C1B17AFA80015AED0 /* GLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5B35A3215CA285400A91A5E /* GLUtils.cpp */; };
+		5597143E1B17AFA80015AED0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57A03E218B1ED9F003156B9 /* CoreVideo.framework */; };
+		559714401B17AFA80015AED0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B603215B7D2460072674A /* OpenGL.framework */; };
+		559714411B17AFA80015AED0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B601215B7CB560072674A /* Cocoa.framework */; };
+		5597144A1B17B0140015AED0 /* GLSoundsOpenAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 559714481B17B00E0015AED0 /* GLSoundsOpenAL.cpp */; };
+		559714761B17EBED0015AED0 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559714751B17EBED0015AED0 /* OpenAL.framework */; };
+		559714781B17ECD30015AED0 /* ALUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559714771B17ECD30015AED0 /* ALUT.framework */; };
+		559714791B17ECDF0015AED0 /* ALUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559714771B17ECD30015AED0 /* ALUT.framework */; };
+		5597147A1B17ECDF0015AED0 /* ALUT.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 559714771B17ECD30015AED0 /* ALUT.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A528F68C189F80470085A43D /* GLImage_CoreImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */; };
 		A54B601315B7CB560072674A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B601215B7CB560072674A /* Cocoa.framework */; };
 		A54B602615B7CB570072674A /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A54B602515B7CB570072674A /* main.mm */; };
@@ -35,6 +52,20 @@
 		A5DE5FBA17A456690063FE8E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE5FB917A456690063FE8E /* AVFoundation.framework */; };
 		A5E2F65C15BE55A900DC68DD /* GLImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5E2F65A15BE55A800DC68DD /* GLImage.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5597147B1B17ECE00015AED0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5597147A1B17ECDF0015AED0 /* ALUT.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		554DA2E91B1668130031B573 /* SwiftGlypha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGlypha.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +84,10 @@
 		554DA3151B1695390031B573 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		559714161B1794EE0015AED0 /* Locks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locks.swift; sourceTree = "<group>"; };
 		559714181B179C300015AED0 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		559714461B17AFA80015AED0 /* Glypha III-OpenAL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Glypha III-OpenAL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		559714481B17B00E0015AED0 /* GLSoundsOpenAL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLSoundsOpenAL.cpp; sourceTree = "<group>"; };
+		559714751B17EBED0015AED0 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		559714771B17ECD30015AED0 /* ALUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ALUT.framework; path = /Library/Frameworks/ALUT.framework; sourceTree = "<absolute>"; };
 		A50CB6E115D1736600126032 /* GLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPoint.h; sourceTree = "<group>"; };
 		A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLImage_CoreImage.cpp; sourceTree = "<group>"; };
 		A54B600E15B7CB560072674A /* Glypha III.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Glypha III.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +120,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5597143D1B17AFA80015AED0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				559714781B17ECD30015AED0 /* ALUT.framework in Frameworks */,
+				559714761B17EBED0015AED0 /* OpenAL.framework in Frameworks */,
+				5597143E1B17AFA80015AED0 /* CoreVideo.framework in Frameworks */,
+				559714401B17AFA80015AED0 /* OpenGL.framework in Frameworks */,
+				559714791B17ECDF0015AED0 /* ALUT.framework in Frameworks */,
+				559714411B17AFA80015AED0 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				A54B600E15B7CB560072674A /* Glypha III.app */,
+				559714461B17AFA80015AED0 /* Glypha III-OpenAL.app */,
 				554DA2E91B1668130031B573 /* SwiftGlypha.app */,
 			);
 			name = Products;
@@ -157,6 +206,8 @@
 		A54B601115B7CB560072674A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				559714771B17ECD30015AED0 /* ALUT.framework */,
+				559714751B17EBED0015AED0 /* OpenAL.framework */,
 				A57A03E218B1ED9F003156B9 /* CoreVideo.framework */,
 				A5DE5FB917A456690063FE8E /* AVFoundation.framework */,
 				A54B601215B7CB560072674A /* Cocoa.framework */,
@@ -189,6 +240,7 @@
 				A50CB6E115D1736600126032 /* GLPoint.h */,
 				A5B35A3215CA285400A91A5E /* GLUtils.cpp */,
 				A5B35A3315CA285400A91A5E /* GLUtils.h */,
+				559714481B17B00E0015AED0 /* GLSoundsOpenAL.cpp */,
 				A5719FE918B1911800FECD41 /* GLSoundsCocoa.mm */,
 				A5DE5FB517A451E00063FE8E /* GLSounds.h */,
 				A5719FEB18B1A0EC00FECD41 /* GLCursorCocoa.mm */,
@@ -218,6 +270,24 @@
 			name = SwiftGlypha;
 			productName = SwiftGlypha;
 			productReference = 554DA2E91B1668130031B573 /* SwiftGlypha.app */;
+			productType = "com.apple.product-type.application";
+		};
+		559714311B17AFA80015AED0 /* Glypha III-OpenAL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 559714431B17AFA80015AED0 /* Build configuration list for PBXNativeTarget "Glypha III-OpenAL" */;
+			buildPhases = (
+				559714321B17AFA80015AED0 /* Sources */,
+				5597143D1B17AFA80015AED0 /* Frameworks */,
+				559714421B17AFA80015AED0 /* Resources */,
+				5597147B1B17ECE00015AED0 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Glypha III-OpenAL";
+			productName = Glypha;
+			productReference = 559714461B17AFA80015AED0 /* Glypha III-OpenAL.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A54B600D15B7CB560072674A /* Glypha III */ = {
@@ -265,6 +335,7 @@
 			projectRoot = "";
 			targets = (
 				A54B600D15B7CB560072674A /* Glypha III */,
+				559714311B17AFA80015AED0 /* Glypha III-OpenAL */,
 				554DA2E81B1668130031B573 /* SwiftGlypha */,
 			);
 		};
@@ -277,6 +348,13 @@
 			files = (
 				554DA2F01B1668130031B573 /* Images.xcassets in Resources */,
 				554DA2F31B1668130031B573 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		559714421B17AFA80015AED0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +383,23 @@
 				554DA30C1B1670EB0031B573 /* Rect.swift in Sources */,
 				554DA3141B168CF70031B573 /* GameView.swift in Sources */,
 				554DA3101B167BB80031B573 /* Render.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		559714321B17AFA80015AED0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				559714341B17AFA80015AED0 /* GLImage_CoreImage.cpp in Sources */,
+				559714351B17AFA80015AED0 /* main.mm in Sources */,
+				5597144A1B17B0140015AED0 /* GLSoundsOpenAL.cpp in Sources */,
+				559714361B17AFA80015AED0 /* GLGame.cpp in Sources */,
+				559714371B17AFA80015AED0 /* GLRenderer.cpp in Sources */,
+				559714381B17AFA80015AED0 /* GLRect.cpp in Sources */,
+				559714391B17AFA80015AED0 /* GLImage.cpp in Sources */,
+				5597143A1B17AFA80015AED0 /* GLResources.cpp in Sources */,
+				5597143B1B17AFA80015AED0 /* GLCursorCocoa.mm in Sources */,
+				5597143C1B17AFA80015AED0 /* GLUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +487,44 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftGlypha/SwiftGlypha-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		559714441B17AFA80015AED0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		559714451B17AFA80015AED0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -506,6 +639,15 @@
 			buildConfigurations = (
 				554DA3011B1668130031B573 /* Debug */,
 				554DA3021B1668130031B573 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		559714431B17AFA80015AED0 /* Build configuration list for PBXNativeTarget "Glypha III-OpenAL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				559714441B17AFA80015AED0 /* Debug */,
+				559714451B17AFA80015AED0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
