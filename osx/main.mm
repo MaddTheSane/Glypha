@@ -286,8 +286,10 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink __unused, const
 
 int main(int argc, char *argv[])
 {
+    @autoreleasepool {
     NSApplication *app = [NSApplication sharedApplication];
     AppController *controller = [[AppController alloc] init];
     app.delegate = controller;
     return NSApplicationMain(argc, (const char **)argv);
+    }
 }
