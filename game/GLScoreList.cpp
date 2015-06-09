@@ -7,3 +7,15 @@
 //
 
 #include "GLScoreList.h"
+
+bool GL::ScoreList::IsHighScore(int score)
+{
+    return score > 100;
+}
+
+bool GL::ScoreList::AddHighScore(const GL::ScoreList::Score &newHighScore)
+{
+    scores.push_back(newHighScore);
+    
+    return true;
+}

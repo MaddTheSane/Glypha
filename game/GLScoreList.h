@@ -19,10 +19,17 @@ namespace GL {
             std::string name;
             int level;
             int score;
+            
+            Score(std::string name, int level, int score) : name(name), level(level), score(score) {};
         };
         
-        bool addScore() {
-            return false;
+        bool IsHighScore(int score);
+        
+        bool AddHighScore(const Score &newHighScore);
+        inline bool AddHighScore(std::string name, int level, int scoreCount)
+        {
+            Score score = Score(name, level, scoreCount);
+            return AddHighScore(score);
         }
         
     private:
