@@ -18,41 +18,34 @@ class GameView: NSOpenGLView {
 	}
 	
 	override func prepareOpenGL() {
-		let ohai = CVDisplayLinkSetOutputCallback
-		
-		//hacky-hacky!
-		let displayLinkCallback: @objc_block (CVDisplayLink!, UnsafePointer<CVTimeStamp>, UnsafePointer<CVTimeStamp>, CVOptionFlags, UnsafeMutablePointer<CVOptionFlags>, displayLinkContext: UnsafeMutablePointer<Void>) -> CVReturn = { (_, _, _, _, _, displayLinkContext) in
-			self.render()
-			return kCVReturnSuccess.value;
-		}
-		
-		let myImp = imp_implementationWithBlock(unsafeBitCast(displayLinkCallback, AnyObject.self))
-		let callback = unsafeBitCast(myImp, CVDisplayLinkOutputCallback.self)
-		
 		// Synchronize buffer swaps with vertical refresh rate
 		var swapInt: GLint = 1
-		openGLContext.setValues(&swapInt, forParameter: .GLCPSwapInterval)
+		openGLContext?.setValues(&swapInt, forParameter: .GLCPSwapInterval)
 		
 		// Create a display link capable of being used with all active displays
-		var aWake: Unmanaged<CVDisplayLink>? = nil
-		CVDisplayLinkCreateWithActiveCGDisplays(&aWake)
-		displayLink = aWake?.takeRetainedValue()
-		
+		var displayLink: CVDisplayLink? = nil
+		CVDisplayLinkCreateWithActiveCGDisplays(&displayLink)
+		if let displayLink = displayLink {
 		// Set the renderer output callback function
-		CVDisplayLinkSetOutputCallback(displayLink, callback, unsafeBitCast(self, UnsafeMutablePointer<Void>.self));
-
+		//CVDisplayLinkSetOutputCallback(displayLink, callback, unsafeBitCast(self, UnsafeMutablePointer<Void>.self));
+		//CV_EXPORT CVReturn CVDisplayLinkSetOutputHandler( CVDisplayLinkRef CV_NONNULL displayLink, CVDisplayLinkOutputHandler CV_NONNULL handler );
+		CVDisplayLinkSetOutputHandler(displayLink) { (_, _, _, _, _) -> CVReturn in
+			self.render()
+			return kCVReturnSuccess;
+		}
+		
 		// Set the display link for the current renderer
-		let cglContext = openGLContext.CGLContextObj
+		let cglContext = openGLContext!.CGLContextObj
 		let cglPixelFormat: COpaquePointer = pixelFormat?.CGLPixelFormatObj ?? nil
 		CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(displayLink, cglContext, cglPixelFormat);
 
 		// Activate the display link
-		CVDisplayLinkStart(displayLink);
+		CVDisplayLinkStart(displayLink)
+		}
 	}
 	
 	func render() {
-		if let game = game {
-			let ctx = openGLContext
+		if let game = game, ctx = openGLContext {
 			ctx.makeCurrentContext()
 			CGLLockContext(ctx.CGLContextObj)
 			game.run()
@@ -87,7 +80,7 @@ class GameView: NSOpenGLView {
 			case unichar(NSRightArrowFunctionKey):
 				key = .RightArrow
 
-				case 0x61:
+			case 0x61:
 				key = .A
 				
 			case 0x73:

@@ -35,7 +35,6 @@
 		5597144A1B17B0140015AED0 /* GLSoundsOpenAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 559714481B17B00E0015AED0 /* GLSoundsOpenAL.cpp */; };
 		559714761B17EBED0015AED0 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559714751B17EBED0015AED0 /* OpenAL.framework */; };
 		559714781B17ECD30015AED0 /* ALUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559714771B17ECD30015AED0 /* ALUT.framework */; };
-		559714791B17ECDF0015AED0 /* ALUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559714771B17ECD30015AED0 /* ALUT.framework */; };
 		5597147A1B17ECDF0015AED0 /* ALUT.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 559714771B17ECD30015AED0 /* ALUT.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A528F68C189F80470085A43D /* GLImage_CoreImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */; };
 		A54B601315B7CB560072674A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B601215B7CB560072674A /* Cocoa.framework */; };
@@ -131,7 +130,6 @@
 				559714761B17EBED0015AED0 /* OpenAL.framework in Frameworks */,
 				5597143E1B17AFA80015AED0 /* CoreVideo.framework in Frameworks */,
 				559714401B17AFA80015AED0 /* OpenGL.framework in Frameworks */,
-				559714791B17ECDF0015AED0 /* ALUT.framework in Frameworks */,
 				559714411B17AFA80015AED0 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,7 +311,8 @@
 		A54B600515B7CB560072674A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Kevin Wojniak";
 				TargetAttributes = {
 					554DA2E81B1668130031B573 = {
@@ -541,6 +540,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;

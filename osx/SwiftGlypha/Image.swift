@@ -50,7 +50,7 @@ final class Image {
 			height = Int32(CGImageGetHeight(img))
 			if let colorSpace = CGColorSpaceCreateDeviceRGB() {
 				let texData = calloc(Int(width * height) * 4, sizeof(Int8))
-				if let ctx = CGBitmapContextCreate(texData, Int(width), Int(height), 8, Int(width) * 4, colorSpace, CGBitmapInfo(rawValue:CGImageAlphaInfo.PremultipliedFirst.rawValue) | .ByteOrder32Little) {
+				if let ctx = CGBitmapContextCreate(texData, Int(width), Int(height), 8, Int(width) * 4, colorSpace, CGImageAlphaInfo.PremultipliedFirst.rawValue | CGBitmapInfo.ByteOrder32Little.rawValue) {
 					CGContextDrawImage(ctx, CGRect(origin: .zeroPoint, size: CGSize(width: Int(width), height: Int(height))), img)
 					loadTextureData(texData);
 
@@ -117,7 +117,7 @@ final class Image {
 		draw(destination: destRect, source: Rect(left: 0, top: 0, width: width, height: height))
 	}
 	
-	func draw(#at: (x: Int32, y: Int32)) {
+	func draw(at at: (x: Int32, y: Int32)) {
 		draw(destination: Rect(left: at.x, top: at.y, width: width, height: height), source: Rect(left: 0, top: 0, width: width, height: height));
 	}
 }

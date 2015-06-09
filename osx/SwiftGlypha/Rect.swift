@@ -66,7 +66,7 @@ struct Rect {
 		}
 	}
 	
-	mutating func offsetBy(#horizontal: Int32, vertical: Int32) {
+	mutating func offsetBy(horizontal horizontal: Int32, vertical: Int32) {
 		left += horizontal;
 		right += horizontal;
 		top += vertical;
@@ -85,7 +85,7 @@ struct Rect {
 		return (left < r2.right && right > r2.left && top < r2.bottom && bottom > r2.top);
 	}
 
-	mutating func inset(#dh: Int32, dv: Int32) {
+	mutating func inset(dh dh: Int32, dv: Int32) {
 		left += dh;
 		right -= (dh * 2);
 		top += dv;

@@ -18,7 +18,7 @@ final class Renderer {
 		bounds = Rect()
 	}
 	
-	func resize(#width: Int32, height: Int32) {
+	func resize(width width: Int32, height: Int32) {
 		let w = GLsizei(width)
 		let h = GLsizei(height)
 		glViewport(0, 0, w, h)
@@ -52,7 +52,7 @@ final class Renderer {
 		glEnd();
 	}
 	
-	func setFillColor(#red: Int32, green: Int32, blue: Int32) {
+	func setFillColor(red red: Int32, green: Int32, blue: Int32) {
 		glColor3f(GLfloat(red), GLfloat(green), GLfloat(blue))
 	}
 
@@ -71,19 +71,19 @@ final class Renderer {
 		glDisable(GLenum(GL_BLEND));
 	}
 
-	func moveTo(#h: Int32, v: Int32) {
+	func moveTo(h h: Int32, v: Int32) {
 		moveTo(point: (v,h))
 	}
 	
-	func moveTo(#point: Point) {
+	func moveTo(point point: Point) {
 		lineStart = point
 	}
 	
-	func lineTo(#h: Int32, v: Int32) {
+	func lineTo(h h: Int32, v: Int32) {
 		lineTo(point: (v,h))
 	}
 	
-	func lineTo(#point: Point) {
+	func lineTo(point point: Point) {
 		glVertex2i(lineStart.h, lineStart.v)
 		glVertex2i(point.h, point.v)
 	}
