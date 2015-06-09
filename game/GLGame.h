@@ -8,6 +8,7 @@
 #include "GLSounds.h"
 #include "GLCursor.h"
 #include "GLUtils.h"
+#include "GLScoreList.h"
 #if _WIN32
 #else
 #include <pthread.h>
@@ -300,6 +301,12 @@ private:
     void handleHelp();
     void drawHelp() const;
     void scrollHelp(short scrollDown);
+    
+    ScoreList scores;
+    HelpState scoreState;
+    void openScores();
+    void handleScores();
+    void drawScores() const;
 };
 
 }
