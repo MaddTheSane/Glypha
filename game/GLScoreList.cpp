@@ -19,3 +19,8 @@ bool GL::ScoreList::AddHighScore(const GL::ScoreList::Score &newHighScore)
     
     return true;
 }
+
+const GL::ScoreList::Score& GL::ScoreList::scoreAtIndex(int idx)
+{
+    return scores[idx];
+}

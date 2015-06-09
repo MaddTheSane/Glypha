@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5594CDE31B17F8FB005BB8A8 /* GLScoreList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5594CDE11B17F8FB005BB8A8 /* GLScoreList.cpp */; };
+		559A4FF81B2768280024F7F6 /* GLScoreListCocoa.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559A4FF61B27681F0024F7F6 /* GLScoreListCocoa.mm */; };
 		A528F68C189F80470085A43D /* GLImage_CoreImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */; };
 		A54B601315B7CB560072674A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B601215B7CB560072674A /* Cocoa.framework */; };
 		A54B602615B7CB570072674A /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A54B602515B7CB570072674A /* main.mm */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		5594CDE11B17F8FB005BB8A8 /* GLScoreList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLScoreList.cpp; sourceTree = "<group>"; };
 		5594CDE21B17F8FB005BB8A8 /* GLScoreList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLScoreList.h; sourceTree = "<group>"; };
+		559A4FF61B27681F0024F7F6 /* GLScoreListCocoa.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLScoreListCocoa.mm; sourceTree = "<group>"; };
 		A50CB6E115D1736600126032 /* GLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPoint.h; sourceTree = "<group>"; };
 		A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLImage_CoreImage.cpp; sourceTree = "<group>"; };
 		A54B600E15B7CB560072674A /* Glypha III.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Glypha III.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 				A59E06DF18A070B8009DF983 /* GLResources.cpp */,
 				A5E2F66315BE5DE900DC68DD /* GLResources.h */,
 				5594CDE11B17F8FB005BB8A8 /* GLScoreList.cpp */,
+				559A4FF61B27681F0024F7F6 /* GLScoreListCocoa.mm */,
 				5594CDE21B17F8FB005BB8A8 /* GLScoreList.h */,
 			);
 			name = game;
@@ -162,7 +165,7 @@
 		A54B600515B7CB560072674A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Kevin Wojniak";
 			};
 			buildConfigurationList = A54B600815B7CB560072674A /* Build configuration list for PBXProject "Glypha" */;
@@ -201,6 +204,7 @@
 				A5719FEA18B1911800FECD41 /* GLSoundsCocoa.mm in Sources */,
 				A528F68C189F80470085A43D /* GLImage_CoreImage.cpp in Sources */,
 				A54B602615B7CB570072674A /* main.mm in Sources */,
+				559A4FF81B2768280024F7F6 /* GLScoreListCocoa.mm in Sources */,
 				5594CDE31B17F8FB005BB8A8 /* GLScoreList.cpp in Sources */,
 				A55C2E5B15B907D900F17FEB /* GLGame.cpp in Sources */,
 				A55C2E5E15B908D300F17FEB /* GLRenderer.cpp in Sources */,
@@ -228,6 +232,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;

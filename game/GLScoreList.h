@@ -32,6 +32,11 @@ namespace GL {
             return AddHighScore(score);
         }
         
+        bool loadScores();
+        void saveScores();
+        
+        const Score& scoreAtIndex(int idx);
+        
     private:
         std::vector<Score> scores;
     };
