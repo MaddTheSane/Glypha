@@ -52,5 +52,33 @@ class AppDelegate: NSObject, NSApplicationDelegate, GameDelegate {
 			helpMenuItem.enabled = true
 		}
 	}
+	
+	func requestName(callBack: (String?) -> ()) {
+		let alert = NSAlert()
+		alert.addButtonWithTitle("OK")
+		alert.addButtonWithTitle("Cancel")
+		alert.messageText = "New high score!"
+		alert.informativeText = "Please enter your name"
+		let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+		input.stringValue = NSFullUserName()
+		alert.accessoryView = input
+		
+		alert.beginSheetModalForWindow(window) { (retVal) -> Void in
+			switch retVal {
+			case NSAlertFirstButtonReturn:
+				let inputStr = input.stringValue
+				if inputStr.characters.count == 0 {
+					NSBeep()
+				} else {
+					callBack(inputStr)
+					return
+				}
+				
+			default:
+				break
+			}
+			callBack(nil)
+		}
+	}
 }
 

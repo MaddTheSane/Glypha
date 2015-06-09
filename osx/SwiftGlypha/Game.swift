@@ -23,16 +23,17 @@ protocol FlyingEnemy {
 
 protocol GameDelegate: class {
 	func handleGameEvent(Game.Event)
+	func requestName(callBack: (String?) -> ())
 }
 
 class Game {
-	struct Key : RawOptionSetType {
+	struct Key : OptionSetType, NilLiteralConvertible {
 		typealias RawValue = UInt
 		private var value: UInt = 0
 		init() {
 			value = 0
 		}
-		init(_ value: UInt) { self.value = value }
+		private init(_ value: UInt) { self.value = value }
 		init(rawValue value: UInt) { self.value = value }
 		init(nilLiteral: ()) { self.value = 0 }
 		static var allZeros: Key { return self(0) }
