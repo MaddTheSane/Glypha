@@ -18,6 +18,7 @@
 		554DA3121B1681360031B573 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DA3111B1681360031B573 /* Image.swift */; };
 		554DA3141B168CF70031B573 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DA3131B168CF70031B573 /* GameView.swift */; };
 		554DA3161B1695390031B573 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DA3151B1695390031B573 /* Game.swift */; };
+		5594CDE31B17F8FB005BB8A8 /* GLScoreList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5594CDE11B17F8FB005BB8A8 /* GLScoreList.cpp */; };
 		559714171B1794EE0015AED0 /* Locks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559714161B1794EE0015AED0 /* Locks.swift */; };
 		559714191B179C300015AED0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559714181B179C300015AED0 /* Utilities.swift */; };
 		559714341B17AFA80015AED0 /* GLImage_CoreImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */; };
@@ -36,6 +37,7 @@
 		559714761B17EBED0015AED0 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559714751B17EBED0015AED0 /* OpenAL.framework */; };
 		559714781B17ECD30015AED0 /* ALUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559714771B17ECD30015AED0 /* ALUT.framework */; };
 		5597147A1B17ECDF0015AED0 /* ALUT.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 559714771B17ECD30015AED0 /* ALUT.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		559A4FF81B2768280024F7F6 /* GLScoreListCocoa.mm in Sources */ = {isa = PBXBuildFile; fileRef = 559A4FF61B27681F0024F7F6 /* GLScoreListCocoa.mm */; };
 		A528F68C189F80470085A43D /* GLImage_CoreImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */; };
 		A54B601315B7CB560072674A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54B601215B7CB560072674A /* Cocoa.framework */; };
 		A54B602615B7CB570072674A /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A54B602515B7CB570072674A /* main.mm */; };
@@ -81,12 +83,15 @@
 		554DA3111B1681360031B573 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		554DA3131B168CF70031B573 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		554DA3151B1695390031B573 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		5594CDE11B17F8FB005BB8A8 /* GLScoreList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLScoreList.cpp; sourceTree = "<group>"; };
+		5594CDE21B17F8FB005BB8A8 /* GLScoreList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLScoreList.h; sourceTree = "<group>"; };
 		559714161B1794EE0015AED0 /* Locks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locks.swift; sourceTree = "<group>"; };
 		559714181B179C300015AED0 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		559714461B17AFA80015AED0 /* Glypha III-OpenAL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Glypha III-OpenAL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559714481B17B00E0015AED0 /* GLSoundsOpenAL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLSoundsOpenAL.cpp; sourceTree = "<group>"; };
 		559714751B17EBED0015AED0 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		559714771B17ECD30015AED0 /* ALUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ALUT.framework; path = /Library/Frameworks/ALUT.framework; sourceTree = "<absolute>"; };
+		559A4FF61B27681F0024F7F6 /* GLScoreListCocoa.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLScoreListCocoa.mm; sourceTree = "<group>"; };
 		A50CB6E115D1736600126032 /* GLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPoint.h; sourceTree = "<group>"; };
 		A528F68B189F80470085A43D /* GLImage_CoreImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLImage_CoreImage.cpp; sourceTree = "<group>"; };
 		A54B600E15B7CB560072674A /* Glypha III.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Glypha III.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +250,9 @@
 				A5719FEC18B1A0EC00FECD41 /* GLCursor.h */,
 				A59E06DF18A070B8009DF983 /* GLResources.cpp */,
 				A5E2F66315BE5DE900DC68DD /* GLResources.h */,
+				5594CDE11B17F8FB005BB8A8 /* GLScoreList.cpp */,
+				559A4FF61B27681F0024F7F6 /* GLScoreListCocoa.mm */,
+				5594CDE21B17F8FB005BB8A8 /* GLScoreList.h */,
 			);
 			name = game;
 			path = ../game;
@@ -409,6 +417,8 @@
 				A5719FEA18B1911800FECD41 /* GLSoundsCocoa.mm in Sources */,
 				A528F68C189F80470085A43D /* GLImage_CoreImage.cpp in Sources */,
 				A54B602615B7CB570072674A /* main.mm in Sources */,
+				559A4FF81B2768280024F7F6 /* GLScoreListCocoa.mm in Sources */,
+				5594CDE31B17F8FB005BB8A8 /* GLScoreList.cpp in Sources */,
 				A55C2E5B15B907D900F17FEB /* GLGame.cpp in Sources */,
 				A55C2E5E15B908D300F17FEB /* GLRenderer.cpp in Sources */,
 				A57D044B15B910A8005CFE23 /* GLRect.cpp in Sources */,
