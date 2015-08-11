@@ -14,13 +14,20 @@
 
 namespace GL {
     class ScoreList {
+        static const int maxScores;
     public:
         struct Score {
+        private:
             std::string name;
             int level;
             int score;
             
+        public:
             Score(std::string name, int level, int score) : name(name), level(level), score(score) {};
+            
+            inline std::string getName() const { return name; }
+            inline int getLevel() const { return level; }
+            inline int getScore() const { return score; }
         };
         
         bool IsHighScore(int score);

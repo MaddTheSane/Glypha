@@ -7,15 +7,33 @@
 //
 
 #include "GLScoreList.h"
+#include <algorithm>
+
+
+static bool compare_as_ints (GL::ScoreList::Score i, GL::ScoreList::Score j)
+{
+    return i.getScore() > j.getScore();
+}
+
+const int GL::ScoreList::maxScores = 10;
 
 bool GL::ScoreList::IsHighScore(int score)
 {
-    return score > 100;
+    return score > scores.back().getScore();
 }
 
 bool GL::ScoreList::AddHighScore(const GL::ScoreList::Score &newHighScore)
 {
+    if (!IsHighScore(newHighScore.getScore())) {
+        return false;
+    }
+    
     scores.push_back(newHighScore);
+    
+    std::stable_sort(scores.begin(), scores.end(), compare_as_ints);
+    while (scores.capacity() > maxScores) {
+        scores.pop_back();
+    }
     
     return true;
 }

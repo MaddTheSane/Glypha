@@ -16,8 +16,22 @@
 
 bool GL::ScoreList::loadScores()
 {
-    //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *savedScores = [defaults objectForKey:kScoresKey];
+    if (savedScores == nil) {
+        return false;
+    }
+    for (NSDictionary *scoreDict in savedScores) {
+        int score = ((NSNumber*)scoreDict[kScoreScoreKey]).intValue;
+        int level = ((NSNumber*)scoreDict[kScoreLevelKey]).intValue;
+        NSString *name = scoreDict[kScoreNameKey];
+        // We may have a score of zero, but not a level of zero
+        // Also a name with a nil value is also not good
+        if (level <= 0 || name == nil) {
+            continue;
+        }
+        AddHighScore(name.UTF8String, level, score);
+    }
     
     return true;
 }
@@ -28,9 +42,9 @@ void GL::ScoreList::saveScores()
     NSMutableArray *mutArray = [[NSMutableArray alloc] initWithCapacity:10];
     for (std::vector<GL::ScoreList::Score>::const_iterator it = scores.begin(); it != scores.end(); it++) {
         const GL::ScoreList::Score &currentScore = *it;
-        NSDictionary *scoreDict = @{kScoreNameKey: @(currentScore.name.c_str()),
-                                    kScoreScoreKey: @(currentScore.score),
-                                    kScoreLevelKey: @(currentScore.level)};
+        NSDictionary *scoreDict = @{kScoreNameKey: @(currentScore.getName().c_str()),
+                                    kScoreScoreKey: @(currentScore.getScore()),
+                                    kScoreLevelKey: @(currentScore.getLevel())};
         [mutArray addObject:scoreDict];
     }
     [defaults setObject:mutArray forKey:kScoresKey];
