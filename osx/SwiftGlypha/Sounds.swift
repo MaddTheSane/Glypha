@@ -37,23 +37,9 @@ final class Sounds {
 				return 1;
 			}
 		}
-
 	}
 	
 	static let kMaxSounds = 14
-	
-	class func preloadCount(which: SoundID) -> Int {
-		switch which {
-		case .Bonus, .Flap1, .Grate, .Lightning, .Spawn, .Walk:
-			return 3
-			
-		case .Flap2, .Scrape2, .Screech:
-			return 8
-			
-		default:
-			return 1
-		}
-	}
 	
 	init() {
 		sounds = [[AVAudioPlayer]]()

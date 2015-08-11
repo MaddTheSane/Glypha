@@ -28,14 +28,8 @@ final class Lock {
 	}
 }
 
-final class Locker {
-	private let lock: Lock
-	init(lock: Lock) {
-		self.lock = lock
-		self.lock.lock()
-	}
-	
-	deinit {
-		lock.unlock()
-	}
+func lockWithin(theLock: Lock, block: () -> ()) {
+	theLock.lock()
+	block()
+	theLock.unlock()
 }

@@ -8,12 +8,16 @@
 
 import Foundation
 
-func >(lhs: ScoreList.Score, rhs: ScoreList.Score) -> Bool {
-	return lhs.score > rhs.score
+func <(lhs: ScoreList.Score, rhs: ScoreList.Score) -> Bool {
+	return lhs.score < rhs.score
+}
+
+func ==(lhs: ScoreList.Score, rhs: ScoreList.Score) -> Bool {
+	return lhs.score == rhs.score
 }
 
 final class ScoreList {
-	struct Score {
+	struct Score: Comparable {
 		var name: String
 		var score: Int32
 		var level: Int32
