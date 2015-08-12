@@ -53,17 +53,11 @@ final class Image {
 				if let ctx = CGBitmapContextCreate(texData, Int(width), Int(height), 8, Int(width) * 4, colorSpace, CGImageAlphaInfo.PremultipliedFirst.rawValue | CGBitmapInfo.ByteOrder32Little.rawValue) {
 					CGContextDrawImage(ctx, CGRect(origin: .zeroPoint, size: CGSize(width: Int(width), height: Int(height))), img)
 					loadTextureData(texData);
-
 				}
 				free(texData)
 			}
 		}
 	}
-	
-	/*
-	func draw(dest: UnsafeMutableBufferPointer<Point>, numDest: size_t, src: UnsafeMutableBufferPointer<Point>, numSrc: size_t) {
-
-	}*/
 	
 	func draw(destination dest: [Point], source src: [Point]) {
 		if (dest.count != src.count || dest.count < 3) {

@@ -15,6 +15,7 @@ private let kMaxEnemies: Int32 = 8
 
 private let kLightningDelay: Double = (1.0 / 25.0)
 private let kNumLightningStrikes: Int32 = 5
+private let kUpdateFreq: Double = (1.0/30.0)
 
 
 protocol FlyingEnemy {
@@ -127,16 +128,115 @@ class Game {
 		var walking = false
 		var wrapping = false
 		var clutched = false
+		private var playerRects = [Rect](count: 11, repeatedValue: Rect())
+
 		weak var gameClass: Game!
 
 		init() {
-			
+			playerRects[0].size = (48, 37)
+			playerRects[0].offsetBy(horizontal: 0, vertical: 0)
+			playerRects[1].size = (48, 37);
+			playerRects[1].offsetBy(horizontal: 0, vertical: 37);
+			playerRects[2].size = (48, 37);
+			playerRects[2].offsetBy(horizontal: 0, vertical: 74);
+			playerRects[3].size = (48, 37);
+			playerRects[3].offsetBy(horizontal: 0, vertical: 111);
+			playerRects[4].size = (48, 48);
+			playerRects[4].offsetBy(horizontal: 0, vertical: 148);
+			playerRects[5].size = (48, 48);
+			playerRects[5].offsetBy(horizontal: 0, vertical: 196);
+			playerRects[6].size = (48, 48);
+			playerRects[6].offsetBy(horizontal: 0, vertical: 244);
+			playerRects[7].size = (48, 48);
+			playerRects[7].offsetBy(horizontal: 0, vertical: 292);
+			playerRects[8].size = (48, 37);		// falling bones rt.
+			playerRects[8].offsetBy(horizontal: 0, vertical: 340);
+			playerRects[9].size = (48, 37);		// falling bones lf.
+			playerRects[9].offsetBy(horizontal: 0, vertical: 377);
+			playerRects[10].size = (48, 22);	// pile of bones
+			playerRects[10].offsetBy(horizontal: 0, vertical: 414);
 		}
 		
 		func draw() {
 			
 		}
+		
+		func reset(initialPlace: Bool) {
+			var location: Int32 = 0
+			
+			srcNum = 5;
+			frame = 320;
+			
+			if (initialPlace) {
+				location = 0;
+			} else {
+				location = gameClass.utils.randomInt32(gameClass.numLedges);
+			}
+			
+			switch (location) {
+			case 0:
+				h = 296 << 4;		// bottom center
+				v = 377 << 4;
+				break;
+				
+			case 1:
+				h = 102 << 4;
+				v = 237 << 4;
+				break;
+				
+			case 2:
+				h = 489 << 4;
+				v = 237 << 4;
+				break;
+				
+			case 3:
+				h = 102 << 4;
+				v = 58 << 4;
+				break;
+				
+			case 4:
+				h = 489 << 4;
+				v = 58 << 4;
+				break;
+				
+			case 5:
+				h = 296 << 4;
+				v = 143 << 4;
+				break;
+				
+			default:
+				break
+			}
+			
+			dest = playerRects[Int(srcNum)];
+			dest.zeroCorner();
+			dest.offsetBy(horizontal: h >> 4, vertical: v >> 4);
+			wasDest = dest;
+			
+			hVel = 0;
+			vVel = 0;
+			facingRight = true;
+			flapping = false;
+			wrapping = false;
+			clutched = false;
+			mode = .Idle;
+			
+			if gameClass.lightningCount == 0 {
+				gameClass.doLightning(Point(dest.left + 24, dest.bottom - 24), count: kNumLightningStrikes);
+			}
+		}
+		
+		func offAMortal() {
+			gameClass.livesLeft--;
+			
+			if (gameClass.livesLeft > 0) {
+				reset(false);
+			} else {
+				gameClass.endGame();
+			}
+		}
 	}
+	
 	private var thePlayer = Player()
 	
 	private let utils = Utilities()
@@ -150,9 +250,9 @@ class Game {
 	private let sounds = Sounds()
 	weak var delegate: GameDelegate?
 	private var levelOn: Int32 = 0
-	private var now: Double {
-		return utils.now
-	}
+	private var now: Double = 0
+	private var lastTime: Double = 0
+	private var accumulator: Double = 0
 	
 	private let bgImg = Image()
 	private let torchesImg = Image()
@@ -165,7 +265,6 @@ class Game {
 	private var platformRects = [Rect](count: 6, repeatedValue: Rect())
 	private var touchDownRects = [Rect](count: 6, repeatedValue: Rect())
 	private var enemyRects = [Rect](count: 24, repeatedValue: Rect())
-	private var playerRects = [Rect](count: 11, repeatedValue: Rect())
 	private var platformCopyRects = [Rect](count: 9, repeatedValue: Rect())
 	
 	private var helpSrc = Rect()
@@ -500,6 +599,7 @@ class Game {
 
 	}
 
+	private var numLedges: Int32 = 0
 	private func drawPlatforms() {
 
 	}
@@ -564,29 +664,6 @@ class Game {
 	}
 	
 	init() {
-		playerRects[0].size = (48, 37)
-		playerRects[0].offsetBy(horizontal: 0, vertical: 0)
-		playerRects[1].size = (48, 37);
-		playerRects[1].offsetBy(horizontal: 0, vertical: 37);
-		playerRects[2].size = (48, 37);
-		playerRects[2].offsetBy(horizontal: 0, vertical: 74);
-		playerRects[3].size = (48, 37);
-		playerRects[3].offsetBy(horizontal: 0, vertical: 111);
-		playerRects[4].size = (48, 48);
-		playerRects[4].offsetBy(horizontal: 0, vertical: 148);
-		playerRects[5].size = (48, 48);
-		playerRects[5].offsetBy(horizontal: 0, vertical: 196);
-		playerRects[6].size = (48, 48);
-		playerRects[6].offsetBy(horizontal: 0, vertical: 244);
-		playerRects[7].size = (48, 48);
-		playerRects[7].offsetBy(horizontal: 0, vertical: 292);
-		playerRects[8].size = (48, 37);		// falling bones rt.
-		playerRects[8].offsetBy(horizontal: 0, vertical: 340);
-		playerRects[9].size = (48, 37);		// falling bones lf.
-		playerRects[9].offsetBy(horizontal: 0, vertical: 377);
-		playerRects[10].size = (48, 22);	// pile of bones
-		playerRects[10].offsetBy(horizontal: 0, vertical: 414);
-		
 		platformRects[0] = Rect(left: 206, top: 424, right: 433, bottom: 438)	//_______________
 		platformRects[1] = Rect(left: -256, top: 284, right: 149, bottom: 298)	//
 		platformRects[2] = Rect(left: 490, top: 284, right: 896, bottom: 298)	//--3--     --4--
@@ -611,6 +688,9 @@ class Game {
 			touchDownRects[i].top = touchDownRects[i].bottom - 11
 		}
 		
+		now = utils.now
+		lastTime = now
+		
 		eye.gameClass = self
 		thePlayer.gameClass = self
 	}
@@ -625,10 +705,34 @@ class Game {
 		helpImg.load(GlyphaDataForResource(.Help))
 	}
 	
+	private func update() {
+		
+	}
+	
 	func run() {
 		if !bgImg.loaded {
 			loadImages()
 		}
+		
+		// See http://gafferongames.com/game-physics/fix-your-timestep/
+		// and http://sacredsoftware.net/tutorials/Animation/TimeBasedAnimation.xhtml
+		let freq = kUpdateFreq
+		let n0 = utils.now
+		let frameTime = n0 - lastTime
+		lastTime = n0
+		accumulator += frameTime
+		var count = 0
+		while accumulator >= freq {
+			update()
+			now += freq;
+			accumulator -= freq;
+			++count;
+		}
+		if count > 2 {
+			print("\(count) cycles")
+		}
+		
+		drawFrame()
 	}
 
 	//MARK: help handling
@@ -701,12 +805,18 @@ class Game {
 		
 	}
 	
+	func handleMouseDownEvent(point: Point) {
+		if !playing {
+			doLightning(point, count: kNumLightningStrikes);
+		}
+	}
+	
 	func handleKeyUpEvent(theKey: Key) {
 		lockWithin(lock, block: { () -> () in
 			self.keys.remove(theKey)
 		})
 	}
-
+	
 	func handleKeyDownEvent(theKey: Key) {
 		lockWithin(lock, block: { [unowned self] () -> ()  in
 			self.keys.insert(theKey)

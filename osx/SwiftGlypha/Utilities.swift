@@ -12,6 +12,7 @@ final class Utilities {
 	private var machConvert: Double
 	
 	init() {
+		srandom(UInt32(time(nil) & 0x7fffffff))
 		var timebaseInfo = mach_timebase_info_data_t()
 		mach_timebase_info(&timebaseInfo);
 		machConvert = (Double(timebaseInfo.numer) / Double(timebaseInfo.denom)) / Double(NSEC_PER_SEC)

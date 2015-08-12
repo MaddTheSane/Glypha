@@ -9,6 +9,13 @@
 import Cocoa
 import CoreVideo
 
+private func cvCallback(_: CVDisplayLink, _: UnsafePointer<CVTimeStamp>, _: UnsafePointer<CVTimeStamp>, _: CVOptionFlags, _: UnsafeMutablePointer<CVOptionFlags>, aPtr: UnsafeMutablePointer<Void>) -> CVReturn {
+	
+	unsafeBitCast(aPtr, GameView.self).render()
+	
+	return kCVReturnSuccess;
+}
+
 class GameView: NSOpenGLView {
 	private var displayLink: CVDisplayLink!
 	weak var game: Game!
@@ -26,21 +33,23 @@ class GameView: NSOpenGLView {
 		var displayLink: CVDisplayLink? = nil
 		CVDisplayLinkCreateWithActiveCGDisplays(&displayLink)
 		if let displayLink = displayLink {
-		// Set the renderer output callback function
-		//CVDisplayLinkSetOutputCallback(displayLink, callback, unsafeBitCast(self, UnsafeMutablePointer<Void>.self));
-		//CV_EXPORT CVReturn CVDisplayLinkSetOutputHandler( CVDisplayLinkRef CV_NONNULL displayLink, CVDisplayLinkOutputHandler CV_NONNULL handler );
-		CVDisplayLinkSetOutputHandler(displayLink) { (_, _, _, _, _) -> CVReturn in
-			self.render()
-			return kCVReturnSuccess;
-		}
-		
-		// Set the display link for the current renderer
-		let cglContext = openGLContext!.CGLContextObj
-		let cglPixelFormat: COpaquePointer = pixelFormat?.CGLPixelFormatObj ?? nil
-		CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(displayLink, cglContext, cglPixelFormat);
-
-		// Activate the display link
-		CVDisplayLinkStart(displayLink)
+			// Set the renderer output callback function
+			if #available(OSX 10.11, *) {
+				CVDisplayLinkSetOutputHandler(displayLink) { (_, _, _, _, _) -> CVReturn in
+					self.render()
+					return kCVReturnSuccess;
+				}
+			} else {
+				CVDisplayLinkSetOutputCallback(displayLink, cvCallback, unsafeBitCast(self, UnsafeMutablePointer<Void>.self));
+			}
+			
+			// Set the display link for the current renderer
+			let cglContext = openGLContext!.CGLContextObj
+			let cglPixelFormat: COpaquePointer = pixelFormat?.CGLPixelFormatObj ?? nil
+			CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(displayLink, cglContext, cglPixelFormat);
+			
+			// Activate the display link
+			CVDisplayLinkStart(displayLink)
 		}
 	}
 	
@@ -117,6 +126,12 @@ class GameView: NSOpenGLView {
 		doKey(theEvent, up: true)
 	}
 	
+	override func mouseDown(theEvent: NSEvent) {
+		let mouseLoc = convertPoint(theEvent.locationInWindow, fromView: nil)
+		let point: Point = (Int32(mouseLoc.x), game.renderer.bounds.height - Int32(mouseLoc.y))
+		game.handleMouseDownEvent(point)
+	}
+
 	override var acceptsFirstResponder: Bool {
 		return true
 	}
