@@ -18,13 +18,6 @@ private let kNumLightningStrikes: Int32 = 5
 private let kUpdateFreq: Double = (1.0/30.0)
 
 
-protocol FlyingEnemy {
-	var maxHorizVelocity: Int32 {get}
-	var maxVertVelocity: Int32 {get}
-	var heightSmell: Int32 {get}
-	var flapImpulse: Int32 {get}
-}
-
 protocol GameDelegate: class {
 	func handleGameEvent(_: Game.Event)
 	func requestName(callBack: (String?) -> ())
@@ -110,6 +103,57 @@ class Game {
 		case Open
 	}
 	
+	class Enemy {
+		//MARK: Flying enemy constants, to be subclassed
+		var maxHorizVelocity: Int32 {
+			return 0
+		}
+		var maxVertVelocity: Int32 {
+			return 0
+		}
+		var heightSmell: Int32 {
+			return 0
+		}
+		var flapImpulse: Int32 {
+			return 0
+		}
+		//MARK: -
+		
+		var facingRight = false
+		var h: Int32 = 0
+		var v: Int32 = 0
+		
+		private var mode = Mode.Idle
+		
+		static var enemyFly: Image!
+		static var enemyWalk: Image!
+		//Image enemyFly;
+		//Image enemyWalk;
+		//Image egg;
+
+		
+		init() {
+			
+		}
+		
+		/*
+		Rect dest, wasDest;
+		int h, v;
+		int wasH, wasV;
+		int hVel, vVel;
+		int srcNum, mode;
+		int kind, frame;
+		int heightSmell, targetAlt;
+		int flapImpulse, pass;
+		int maxHVel, maxVVel;
+		bool facingRight;
+		*/
+	}
+	
+	private class Egg: Enemy {
+		static var eggImage: Image!
+	}
+	
 	private class Player {
 		var dest = Rect()
 		var wasDest = Rect()
@@ -161,7 +205,7 @@ class Game {
 			
 		}
 		
-		func reset(initialPlace: Bool) {
+		func reset(toInitialPlace initialPlace: Bool) {
 			var location: Int32 = 0
 			
 			srcNum = 5;
@@ -230,7 +274,7 @@ class Game {
 			gameClass.livesLeft--;
 			
 			if (gameClass.livesLeft > 0) {
-				reset(false);
+				reset(toInitialPlace: false);
 			} else {
 				gameClass.endGame();
 			}
@@ -642,25 +686,49 @@ class Game {
 		drawLightning();
 	}
 	
-	private final class Owl: FlyingEnemy {
-		let maxHorizVelocity: Int32 = 96
-		let maxVertVelocity: Int32 = 320
-		let heightSmell: Int32 = 96
-		let flapImpulse: Int32 = 32
+	private final class Owl: Enemy {
+		override var maxHorizVelocity: Int32 {
+			return 96
+		}
+		override var maxVertVelocity: Int32 {
+			return 320
+		}
+		override var heightSmell: Int32 {
+			return 96
+		}
+		override var flapImpulse: Int32 {
+			return 32
+		}
 	}
 	
-	private final class Parrot: FlyingEnemy {
-		let maxHorizVelocity: Int32 = 128
-		let maxVertVelocity: Int32 = 400
-		let heightSmell: Int32 = 160
-		let flapImpulse: Int32 = 48
+	private final class Parrot: Enemy {
+		override var maxHorizVelocity: Int32 {
+			return 128
+		}
+		override var maxVertVelocity: Int32 {
+			return 400
+		}
+		override var heightSmell: Int32 {
+			return 160
+		}
+		override var flapImpulse: Int32 {
+			return 48
+		}
 	}
 	
-	private final class Jackal: FlyingEnemy {
-		let maxHorizVelocity: Int32 = 192
-		let maxVertVelocity: Int32 = 512
-		let heightSmell: Int32 = 240
-		let flapImpulse: Int32 = 72
+	private final class Jackal: Enemy {
+		override var maxHorizVelocity: Int32 {
+			return 192
+		}
+		override var maxVertVelocity: Int32 {
+			return 512
+		}
+		override var heightSmell: Int32 {
+			return 240
+		}
+		override var flapImpulse: Int32 {
+			return 72
+		}
 	}
 	
 	init() {
